@@ -76,8 +76,7 @@ class Strapon:
         self.logger = self.bot.logger.getChild(self.package_dir.name)
         self.metadata = StraponMetadata(self.package_dir)
 
-        self.storage_path = self.bot.data_dir / "storage" / self.metadata.id
-        self.storage_path.mkdir(parents=True, exist_ok=True)
+        self._storage_path = self.bot.data_dir / "storage" / self.metadata.id
 
         config_path = self.bot.data_dir / "config" / f"{self.metadata.id}.yml"
         default_config_path = self.package_dir / DEFAULT_CONFIG_FILE_NAME
@@ -93,6 +92,11 @@ class Strapon:
                     f"A default config file is required if a config object is provided. "
                     f"File not found at: {default_config_path.resolve()}",
                 )
+
+    @property
+    def storage_path(self) -> Path:
+        self.storage_path.mkdir(parents=True, exist_ok=True)
+        return self._storage_path
 
     async def load(self) -> None:
         if self.config is not None:
