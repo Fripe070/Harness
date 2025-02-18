@@ -1,0 +1,7 @@
+token: ""
+prefix_or_mention: true
+prefixes:
+  - "t!"
+  - "t!!"
+enabled_strapons:
+  - ""

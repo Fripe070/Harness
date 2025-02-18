@@ -1,0 +1,70 @@
+[project]
+name = "harness"
+version = "0.0.1"
+authors = [{ name = "Fripe" }]
+license = { file = "LICENSE" }
+
+requires-python = ">=3.12"
+dependencies = [
+    "discord-py@git+https://github.com/Rapptz/discord.py",
+    "strictyaml==1.7.3",
+    "aiofiles==24.1.0",
+    "packaging==24.2",
+]
+
+[tool.setuptools]
+py-modules = ["harness"]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+
+# TODO: Look over
+select = [
+    "F",        # pyflakes
+    "W",        # pycodestyle warnings
+    "E",        # pycodestyle errors
+    "I",        # isort
+    "N",        # pep8-naming
+    "UP",       # pyupgrade
+    "ASYNC",    # flake8-async
+    "S",        # flake8-bandit
+    "B",        # flake8-bugbear
+    "COM",      # flake8-commas
+    "C4",       # flake8-comprehensions
+    "Q",        # flake8-quotes
+    "RET",      # flake8-return
+    "SIM",      # flake8-simplify
+    "TCH",      # flake8-type-checking
+    "ARG",      # flake8-unused-arguments
+    "PTH",      # flake8-use-pathlib
+    "PGH",      # pygrep-hooks
+    "PL",       # Pylint
+    "PERF",     # Perflint
+    "RUF",      # Ruff-specific rules
+]
+
+ignore = [
+    # Insane suggestion that pathlib.Path.open() should be prefered over open()
+    "PTH123",
+    # Too inflexible to be reasonable
+    # https://github.com/Breadcord/Breadcord/pull/144#issuecomment-1732071028
+    "PLR0913",
+    # Warnings on every usage of the random module is outrageous
+    "S311",
+    # Verbosity is not always a bad thing
+    "UP015",
+    # Assert is used inteligently
+    "S101",
+]
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "double"
+multiline-quotes = "double"
